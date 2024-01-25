@@ -41,7 +41,7 @@ button:hover > i {
 button i {
     color: #102F5E;
     font-weight: bold;
-    pointer-events: none;
+    pointer-events: none; // PARA O ÍCONE DO BOTÃO NÃO "FICAR NA FRENTE" EM CASO DE CLIQUE NO ELEMENTO BUTTON.
 }
 
 input, select {
@@ -62,6 +62,7 @@ input, select {
     background-color: #FDFDFD;
     padding: 1.5rem;
     border-radius: 15px;
+    box-shadow: 3px 3px 10px darkslategrey;
 }
 
 .todo-container header {
@@ -154,6 +155,11 @@ input, select {
 /********************************
 ***********TODO LIST*************
 ********************************/
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+}
 
 .todo {
     display: flex;
