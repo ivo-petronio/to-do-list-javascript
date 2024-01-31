@@ -52,6 +52,11 @@ input, select {
     display: none;
 }
 
+footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
 /****************************
 *********TODO HEADER*********
 ****************************/
