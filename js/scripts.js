@@ -4,51 +4,47 @@
 
 const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo-input");
-const todoList = document.querySelector("#todo-list");
+const todoList = document.querySelector(".todo-list");
 const editForm = document.querySelector("#edit-form");
 const editInput = document.querySelector("#edit-input");
 const cancelEditBtn = document.querySelector("#cancel-edit-btn");
 const finishToDo = document.querySelector(".finish-todo");
 const todo = document.querySelector("todo");
 const finishBtn = document.querySelector(".finish-todo");
+const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 let oldInputValue;
-
-
-
 
 
 /********************************
 ************FUNÇÕES**************
 ********************************/
-const save_to_do = (text) => {
-    const todo = document.createElement("div");
-    todo.classList.add("todo");
+function save_to_do(task) {
+
+    const li = document.createElement("li");
+    li.classList.add("todo");
     
     const todoTitle = document.createElement("h3");
-    todoTitle.innerText = text;
-    todo.appendChild(todoTitle);
+    todoTitle.innerText = task.descricao;
+    li.appendChild(todoTitle);
 
     const doneBtn = document.createElement("button");
     doneBtn.classList.add("finish-todo");
     doneBtn.innerHTML = '<i class="fa-solid fa-check"><i/>';
-    todo.appendChild(doneBtn);
+    li.appendChild(doneBtn);
 
     const editBtn = document.createElement("button");
     editBtn.classList.add("edit-todo");
     editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>'
-    todo.appendChild(editBtn);
+    li.appendChild(editBtn);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("remove-todo");
     deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'
-    todo.appendChild(deleteBtn);
+    li.appendChild(deleteBtn);
 
-    todoList.appendChild(todo);
+    return li;
+}
 
-    todoInput.value = ""; // LIMPA O CAMPO "TAREFA" APÓS O ENVIO
-    todoInput.focus();
-
-};
 
 const toggleForms = () => {
     editForm.classList.toggle("hide");
@@ -67,20 +63,33 @@ const updateToDo = (editInputValue) => {
 };
 
 
-
 /********************************
 *************EVENTOS*************
 ********************************/
+
 
 todoForm.addEventListener("submit", (e) => {
 
     e.preventDefault();
 
-    const inputValue = todoInput.value;
-    if (inputValue) {
-        save_to_do(inputValue);
+    const task = {
+        descricao: todoInput.value
     }
+    tasks.push(task);
+    const taskItem = save_to_do(task);
+    todoList.append(taskItem);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+    todoInput.value = "";
+    todoInput.focus();
 });
+
+
+tasks.forEach(task => {
+    const itemList = save_to_do(task);
+    todoList.append(itemList);
+})
+
 
 todoList.addEventListener("click", (e) => {
     
