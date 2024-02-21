@@ -20,29 +20,29 @@ let oldInputValue;
 ********************************/
 function save_to_do(task) {
 
-    const li = document.createElement("li");
-    li.classList.add("todo");
+    const taskItem = document.createElement("div");
+    taskItem.classList.add("todo");
     
     const todoTitle = document.createElement("h3");
     todoTitle.innerText = task.descricao;
-    li.appendChild(todoTitle);
+    taskItem.appendChild(todoTitle);
 
     const doneBtn = document.createElement("button");
     doneBtn.classList.add("finish-todo");
     doneBtn.innerHTML = '<i class="fa-solid fa-check"><i/>';
-    li.appendChild(doneBtn);
+    taskItem.appendChild(doneBtn);
 
     const editBtn = document.createElement("button");
     editBtn.classList.add("edit-todo");
     editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>'
-    li.appendChild(editBtn);
+    taskItem.appendChild(editBtn);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("remove-todo");
     deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>'
-    li.appendChild(deleteBtn);
+    taskItem.appendChild(deleteBtn);
 
-    return li;
+    return taskItem;
 }
 
 
